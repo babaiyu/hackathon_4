@@ -18,4 +18,5 @@ export const routeType = {
   publicV1: '/api/v1/public',
   userV1: '/api/v1/user',
   v1: '/api/v1',
+  restrictedV1: '/api/v1/restricted',
 };

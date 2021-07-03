@@ -21,7 +21,7 @@ const errorHandler = (code: number, reply: Reply) => {
 
     case 401: // Unauthorized
       payload.code = code;
-      payload.message = 'Gagal verifikasi token!';
+      payload.message = 'Unauthorized!';
       break;
 
     case 403: // Forbidden

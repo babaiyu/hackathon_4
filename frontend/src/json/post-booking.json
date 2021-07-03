@@ -1,0 +1,13 @@
+{
+  "duration": "2",
+  "price": "240",
+  "bookingDateStart": "new Date()",
+  "bookingDateEnd": "new Date()",
+  "firstName": "Randi",
+  "lastName": "Maulana Akbar",
+  "emailAddress": "inforandi97@gmail.com",
+  "phoneNumber": "081934644920",
+  "accountHolder": "Randi Maulana",
+  "bankFrom": "BCA",
+  "proofPayment": "FileData()"
+}

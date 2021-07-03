@@ -1,0 +1,184 @@
+{
+  "hero": {
+    "travelers": 80409,
+    "treasures": 882,
+    "cities": 1492
+  },
+  "mostPicked": [
+    {
+      "_id": "asd1293uasdads1",
+      "name": "Everyday Smart Hotel",
+      "type": "Apartment",
+      "imageUrl": "/images/img-mostpicked-1.jpg",
+      "country": "Indonesia",
+      "city": "Malang",
+      "price": "60",
+      "unit": "night"
+    },
+    {
+      "_id": "asd1293uasdads1",
+      "name": "The Singhasari Resort",
+      "type": "Hotel",
+      "imageUrl": "/images/img-mostpicked-2.jpg",
+      "country": "Indonesia",
+      "city": "Batu",
+      "price": "52",
+      "unit": "night"
+    },
+    {
+      "_id": "asd1293uasdads1",
+      "name": "Village Batos",
+      "type": "Rumah",
+      "imageUrl": "/images/img-mostpicked-3.jpg",
+      "country": "Indonesia",
+      "city": "Batu",
+      "price": "30",
+      "unit": "night"
+    },
+    {
+      "_id": "asd1293uasdads1",
+      "name": "Sheraton Surabaya Hotel",
+      "type": "Apartment",
+      "imageUrl": "/images/img-mostpicked-4.jpg",
+      "country": "Indonesia",
+      "city": "Surabaya",
+      "price": "45",
+      "unit": "night"
+    },
+    {
+      "_id": "asd1293uasdads1",
+      "name": "Beauty Bromo",
+      "type": "Rumah",
+      "imageUrl": "/images/img-mostpicked-5.jpg",
+      "country": "Indonesia",
+      "city": "Bromo",
+      "price": "80",
+      "unit": "night"
+    }
+  ],
+  "categories": [
+    {
+      "_id": "asd1293uasdads1",
+      "name": "House with beauty backyard",
+      "items": [
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Flower Garden",
+          "imageUrl": "/images/image-category-1.jpg",
+          "country": "Indonesia",
+          "city": "Batu",
+          "isPopular": true
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Istana Dieng",
+          "imageUrl": "/images/image-category-2.jpg",
+          "country": "Indonesia",
+          "city": "Malang",
+          "isPopular": false
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Ubud",
+          "imageUrl": "/images/image-category-3.jpg",
+          "country": "Indonesia",
+          "city": "Bali",
+          "isPopular": false
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "The Jungle",
+          "imageUrl": "/images/image-category-4.jpg",
+          "country": "Indonesia",
+          "city": "Banyuwangi",
+          "isPopular": false
+        }
+      ]
+    },
+    {
+      "_id": "asd1293uasdads1",
+      "name": "Hotels with large living room",
+      "items": [
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Ijen Nirwana",
+          "imageUrl": "/images/image-category-5.jpg",
+          "country": "Indonesia",
+          "city": "Malang",
+          "isPopular": false
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Grand City",
+          "imageUrl": "/images/image-category-6.jpg",
+          "country": "Indonesia",
+          "city": "Surabaya",
+          "isPopular": false
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Batu Night Spectacular",
+          "imageUrl": "/images/image-category-7.jpg",
+          "country": "Indonesia",
+          "city": "Batu",
+          "isPopular": false
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Nusa Dua",
+          "imageUrl": "/images/image-category-8.jpg",
+          "country": "Indonesia",
+          "city": "Bali",
+          "isPopular": true
+        }
+      ]
+    },
+    {
+      "_id": "asd1293uasdads1",
+      "name": "Apartments with kitchen set",
+      "items": [
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Sky Night",
+          "imageUrl": "/images/image-category-9.jpg",
+          "country": "Indonesia",
+          "city": "Surabaya",
+          "isPopular": false
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Nirvana Residence",
+          "imageUrl": "/images/image-category-10.jpg",
+          "country": "Indonesia",
+          "city": "Malang",
+          "isPopular": false
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Arya Duta",
+          "imageUrl": "/images/image-category-11.jpg",
+          "country": "Indonesia",
+          "city": "Kediri",
+          "isPopular": true
+        },
+        {
+          "_id": "asd1293uasdads1",
+          "name": "Grand Dhika",
+          "imageUrl": "/images/image-category-12.jpg",
+          "country": "Indonesia",
+          "city": "Batu",
+          "isPopular": false
+        }
+      ]
+    }
+  ],
+  "testimonial": {
+    "_id": "asd1293uasdads1",
+    "imageUrl": "/images/testimonial-landingpages.jpg",
+    "name": "Happy Family",
+    "rate": 4.55,
+    "content": "What a great trip with my family and I should try again next time soon ...",
+    "familyName": "Randi",
+    "familyOccupation": "Software Engineer"
+  }
+}

@@ -64,7 +64,7 @@ const viewProductByID = async (req: Request<any>, reply: Reply) => {
         .beginTransaction()
         .then(async () => {
           await conn.query(queryProduct, [id]).then((res) => {
-            if (res.length > 0) payload = res;
+            if (res.length > 0) payload = res[0];
           });
 
           await conn

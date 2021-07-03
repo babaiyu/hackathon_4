@@ -4,7 +4,7 @@ conn();
 
 // Config ENV
 export const config = {
-  port: process.env.PORT || 8500,
+  port: process.env.PORT || 8000,
   node_env: process.env.NODE_ENV,
   db_host: process.env.DB_HOST,
   db_user: process.env.DB_USER,

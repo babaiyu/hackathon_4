@@ -84,4 +84,76 @@ const viewProductByID = async (req: Request<any>, reply: Reply) => {
     .catch((err) => errorHandler(500, reply));
 };
 
-export default {viewProduct, viewProductByID};
+// Create Product (admin)
+const createProduct = async (req: Request<any>, reply: Reply) => {
+  const {name_product, description, place, url_photo} = req.body;
+
+  const query = `INSERT INTO product (name_product, description, place, url_photo) VALUES(?, ?, ?, ?)`;
+
+  await connector()
+    .then(async (conn) => {
+      await conn
+        .query(query, [name_product, description, place, url_photo])
+        .then((res) => {
+          reply.code(200).send(response(true, 'Success create product'));
+        })
+        .catch((err) => errorHandler(400, reply))
+        .finally(() => conn.end());
+    })
+    .catch((err) => errorHandler(500, reply));
+};
+
+// Create Packet By Product
+const createPacketByProduct = async (req: Request<any>, reply: Reply) => {
+  const {id_product, name_room, description, price, capacity, url_photo} =
+    req.body;
+
+  const query = `INSERT INTO product_packet (id_product, name_room, description, price, capacity, url_photo)
+  VALUES (?, ?, ?, ?, ?, ?)`;
+
+  await connector()
+    .then(async (conn) => {
+      await conn
+        .query(query, [
+          id_product,
+          name_room,
+          description,
+          price,
+          capacity,
+          url_photo,
+        ])
+        .then((res) => {
+          reply.code(200).send(response(true, 'Success create packet'));
+        })
+        .catch((err) => errorHandler(400, reply))
+        .finally(() => conn.end());
+    })
+    .catch((err) => errorHandler(500, reply));
+};
+
+// Create Facility by Packet
+const createFacilityByPacket = async (req: Request<any>, reply: Reply) => {
+  const {id_packet, name_facility} = req.body;
+
+  const query = `INSERT INTO packet_facility (id_packet, name_facility) VALUES(?, ?)`;
+
+  await connector()
+    .then(async (conn) => {
+      await conn
+        .query(query, [id_packet, name_facility])
+        .then((res) => {
+          reply.code(200).send(response(true, 'Success create Facility'));
+        })
+        .catch((err) => errorHandler(400, reply))
+        .finally(() => conn.end());
+    })
+    .catch((err) => errorHandler(500, reply));
+};
+
+export default {
+  viewProduct,
+  viewProductByID,
+  createProduct,
+  createPacketByProduct,
+  createFacilityByPacket,
+};

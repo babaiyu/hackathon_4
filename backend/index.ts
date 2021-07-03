@@ -1,6 +1,9 @@
 import fastify from 'fastify';
 import fastifyCors from 'fastify-cors';
 import fastifyHealth from 'fastify-healthcheck';
+import fastifyStatic from 'fastify-static';
+import multer from 'fastify-multer';
+import path from 'path';
 import {config} from './src/config';
 import routes from './src/routes';
 
@@ -14,6 +17,9 @@ const server = fastify({
 // Register CORS
 server.register(fastifyCors);
 
+// Register multer
+server.register(multer.contentParser);
+
 // Register Health Check
 server.register(fastifyHealth);
 
@@ -24,6 +30,12 @@ routes.forEach((route) => {
 
 server.get('/', async (req, reply) => {
   reply.send({message: 'Hello World'});
+});
+
+// Register Static Public directory
+server.register(fastifyStatic, {
+  root: path.join(__dirname, 'public'),
+  prefix: '/public/',
 });
 
 // Start Server

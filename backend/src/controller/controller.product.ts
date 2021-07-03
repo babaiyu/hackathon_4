@@ -93,6 +93,7 @@ const createProduct = async (req: Request<any>, reply: Reply) => {
   await connector()
     .then(async (conn) => {
       await conn
+        .query(query, [name_product, description, place])
         .query(query, [name_product, description, place, url_photo])
         .then((res) => {
           reply.code(200).send(response(true, 'Success create product'));

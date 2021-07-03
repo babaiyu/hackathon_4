@@ -33,6 +33,21 @@ const routeProduct: RouteOptions[] = [
     schema: viewIDSchema,
     handler: controllerProduct.viewProductByID,
   },
+  {
+    method: 'POST',
+    url: `${routeType.restrictedV1}/create-product`,
+    handler: controllerProduct.createProduct,
+  },
+  {
+    method: 'POST',
+    url: `${routeType.restrictedV1}/create-packet`,
+    handler: controllerProduct.createPacketByProduct,
+  },
+  {
+    method: 'POST',
+    url: `${routeType.restrictedV1}/create-facility`,
+    handler: controllerProduct.createFacilityByPacket,
+  },
 ];
 
 export default routeProduct;

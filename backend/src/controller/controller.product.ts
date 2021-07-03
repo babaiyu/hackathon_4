@@ -86,14 +86,14 @@ const viewProductByID = async (req: Request<any>, reply: Reply) => {
 
 // Create Product (admin)
 const createProduct = async (req: Request<any>, reply: Reply) => {
-  const {name_product, description, place} = req.body;
+  const {name_product, description, place, url_photo} = req.body;
 
-  const query = `INSERT INTO product (name_product, description, place) VALUES(?, ?, ?)`;
+  const query = `INSERT INTO product (name_product, description, place, url_photo) VALUES(?, ?, ?, ?)`;
 
   await connector()
     .then(async (conn) => {
       await conn
-        .query(query, [name_product, description, place])
+        .query(query, [name_product, description, place, url_photo])
         .then((res) => {
           reply.code(200).send(response(true, 'Success create product'));
         })
@@ -105,15 +105,23 @@ const createProduct = async (req: Request<any>, reply: Reply) => {
 
 // Create Packet By Product
 const createPacketByProduct = async (req: Request<any>, reply: Reply) => {
-  const {id_product, name_room, description, price, capacity} = req.body;
+  const {id_product, name_room, description, price, capacity, url_photo} =
+    req.body;
 
-  const query = `INSERT INTO product_packet (id_product, name_room, description, price, capacity)
-  VALUES (?, ?, ?, ?, ?)`;
+  const query = `INSERT INTO product_packet (id_product, name_room, description, price, capacity, url_photo)
+  VALUES (?, ?, ?, ?, ?, ?)`;
 
   await connector()
     .then(async (conn) => {
       await conn
-        .query(query, [id_product, name_room, description, price, capacity])
+        .query(query, [
+          id_product,
+          name_room,
+          description,
+          price,
+          capacity,
+          url_photo,
+        ])
         .then((res) => {
           reply.code(200).send(response(true, 'Success create packet'));
         })

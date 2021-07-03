@@ -10,9 +10,11 @@ export const config = {
   db_user: process.env.DB_USER,
   db_pass: process.env.DB_PASS,
   db_name: process.env.DB_NAME,
+  secret_key: process.env.SECRET_KEY,
 };
 
 // Route Type
 export const routeType = {
   publicV1: '/api/v1/public',
+  v1: '/api/v1',
 };

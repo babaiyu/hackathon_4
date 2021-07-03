@@ -10,6 +10,8 @@ const db = mariadb.createPool({
   database: db_name,
 });
 
-const connector = db.getConnection();
+const connector = async () => {
+  return await db.getConnection();
+};
 
 export default connector;

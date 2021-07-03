@@ -16,5 +16,6 @@ export const config = {
 // Route Type
 export const routeType = {
   publicV1: '/api/v1/public',
+  userV1: '/api/v1/user',
   v1: '/api/v1',
 };

@@ -10,7 +10,9 @@ const viewProduct = async (req: Request<any>, reply: Reply) => {
   const limit = 10;
   const offset = (page - 1) * limit;
 
-  const query = `SELECT id, name_product, place FROM product
+  const query = `SELECT product.id, product.name_product, product.description, product.place, product.url_photo,
+  (SELECT status FROM covid19 WHERE covid19.id_product = product.id) AS 'covid19_status'
+  FROM product
   ORDER BY product.id DESC LIMIT ? OFFSET ?`;
   const queryCount = 'SELECT COUNT(id) FROM product';
 
@@ -52,10 +54,15 @@ const viewProduct = async (req: Request<any>, reply: Reply) => {
 const viewProductByID = async (req: Request<any>, reply: Reply) => {
   const {id} = req.params;
 
-  const queryProduct = `SELECT id, name_product, place FROM product WHERE id = ?`;
-  const queryPacket = `SELECT product_packet.id, product_packet.name_room, product_packet.facility, product_packet.price FROM product_packet
+  const queryProduct = `SELECT id, name_product, place, url_photo,
+  (SELECT status FROM covid19 WHERE covid19.id_product = product.id) AS 'covid19_status'
+  FROM product WHERE id = ?`;
+  const queryPacket = `SELECT product_packet.id, product_packet.name_room, product_packet.price FROM product_packet
   INNER JOIN product ON product.id = product_packet.id_product
   WHERE product_packet.id_product = ?`;
+  const queryReview = `SELECT review.id, user.name, review.star, review.comment FROM review
+  INNER JOIN user ON user.id = review.id_user
+  WHERE review.id_product = ?`;
 
   await connector()
     .then(async (conn) => {
@@ -63,19 +70,27 @@ const viewProductByID = async (req: Request<any>, reply: Reply) => {
       await conn
         .beginTransaction()
         .then(async () => {
+          // Get Product
           await conn.query(queryProduct, [id]).then((res) => {
             if (res.length > 0) payload = res[0];
           });
 
+          // Get Packet
           await conn
             .query(queryPacket, [id])
             .then((res) => (payload = {...payload, packet: res}));
+
+          // Get Review
+          await conn
+            .query(queryReview, [id])
+            .then((res) => (payload = {...payload, review: res}));
         })
         .then(() => {
           conn.commit();
           reply.code(200).send(response(true, '', payload));
         })
         .catch((err) => {
+          console.log('ERrr===', err);
           conn.rollback();
           errorHandler(400, reply);
         })

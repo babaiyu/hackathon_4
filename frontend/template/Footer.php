@@ -86,3 +86,128 @@
         </div>
     </div>
 </footer>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#formTrial").submit(function(e) {
+            e.preventDefault();
+            heheTRIAL();
+            return false;
+        });
+
+        $("#formUpgrade").submit(function(e) {
+            e.preventDefault();
+            hehePAYMENT();
+            return false;
+        });
+
+
+        $("#directPurchase").submit(function(e) {
+            e.preventDefault();
+            directPurchasePay();
+            return false;
+        });
+
+
+    });
+
+
+
+
+
+
+
+
+    function Register() {
+        var data = $('#formRegister').serialize();
+        var first_name = document.getElementById("first_name").value;
+        var last_name = document.getElementById("last_name").value;
+        var company = document.getElementById("company").value;
+        var company_abn = document.getElementById("company_abn").value;
+        var mobile_number = document.getElementById("mobile_number").value;
+        var email = document.getElementById("email").value;
+        var password = document.getElementById("password").value;
+        var sender = document.getElementById("sender").value;
+
+        $.ajax({
+            type: 'POST',
+            url: "/process/processLogin.php?f=AddUserUI&packageType=1",
+            data: data,
+            dataType: 'json',
+
+            beforeSend: function() {
+                Swal.fire({
+                    html: '<h5>Loading...</h5>',
+                    showConfirmButton: false,
+                    onRender: function() {
+                        // there will only ever be one sweet alert open.
+                        $('.swal2-content').prepend(sweet_loader);
+                    }
+                });
+            },
+
+            success: function(response) {
+                // console.log(response)
+                if (response.success == true) {
+                    Swal.fire({
+                        icon: "success",
+                        title: "Registration success!",
+                        text: 'Please check your email, you are almost there. We have sent an email to ' +
+                            email,
+                        confirmButtonText: "Ok"
+                    }).then(() => {
+                        document.getElementById("formTrial").reset();
+                        // window.location = "http://13.211.215.52/website-landing/";
+                        window.location = "http://smsbroadcast.onecontact.com.au/";
+                    });
+                } else if (response.emailDupplicate !== null) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Email has been duplicated!',
+                    })
+                } else if (response.PhoneDupplicate !== null) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Mobile Number has been duplicated!',
+                    })
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Something Wrong please check your data!',
+                    })
+                }
+            },
+            error: function(response) {
+                console.log(response.responseText);
+            }
+        });
+    }
+
+
+    function Login() {
+
+        var data = $('#formLogin').serialize();
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: restHost + "process/processLogin.php?f=AddUserUIPAYMENT2",
+            data: data,
+            dataType: 'json',
+            success: function(response) {
+                // console.log(response)
+
+            },
+            error: function(response) {
+                // console.log(response.responseText);
+            }
+        });
+    }
+</script>

@@ -8,28 +8,28 @@
                            <div class="main-menu  d-none d-lg-block">
                                <nav>
                                    <ul id="navigation">
-                                       <li><a class="active" href="index.php?page=home">home</a></li>
-                                       <li><a href="rooms.html">rooms</a></li>
-                                       <li><a href="about.html">About</a></li>
-                                       <li><a href="#">blog <i class="ti-angle-down"></i></a>
+                                       <li><a class="active" href="index.php?page=home">Home</a></li>
+                                       <li><a href="index.php?page=login">Login</a></li>
+                                       <li><a href="index.php?page=register">Register</a></li>
+                                       <!-- <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                            <ul class="submenu">
                                                <li><a href="blog.html">blog</a></li>
                                                <li><a href="single-blog.html">single-blog</a></li>
                                            </ul>
-                                       </li>
-                                       <li><a href="#">pages <i class="ti-angle-down"></i></a>
+                                       </li> -->
+                                       <!-- <li><a href="#">pages <i class="ti-angle-down"></i></a>
                                            <ul class="submenu">
                                                <li><a href="elements.html">elements</a></li>
                                            </ul>
-                                       </li>
-                                       <li><a href="contact.html">Contact</a></li>
+                                       </li> -->
+                                       <!-- <li><a href="contact.html">Contact</a></li> -->
                                    </ul>
                                </nav>
                            </div>
                        </div>
                        <div class="col-xl-2 col-lg-2">
                            <div class="logo-img">
-                               <a href="index.html">
+                               <a href="index.php?page=home">
                                    <img src="img/logo.png" alt="">
                                </a>
                            </div>
@@ -55,9 +55,11 @@
                                        </li>
                                    </ul>
                                </div>
-                               <div class="book_btn d-none d-lg-block">
-                                   <a class="popup-with-form" href="#test-form">Book A Room</a>
-                               </div>
+                               <!-- <div class="book_btn d-none d-lg-block">
+                                   <a class="popup-with-form" href="#test-form">Register</a>
+                               </div> -->
+
+
                            </div>
                        </div>
                        <div class="col-12">

@@ -6,12 +6,15 @@ import response from '../helpers/response';
 
 // View Product
 const viewProduct = async (req: Request<any>, reply: Reply) => {
-  const {page} = req.query;
+  const {page, name, place} = req.query;
   const limit = 10;
   const offset = (page - 1) * limit;
 
-  const query = `SELECT id, name_product, place FROM product
-  ORDER BY product.id DESC LIMIT ? OFFSET ?`;
+  const query = `SELECT product.id, product.name_product, product.description, product.place, product.url_photo,
+  (SELECT status FROM covid19 WHERE covid19.id_product = product.id) AS 'covid19_status'
+  FROM product
+  WHERE name_product LIKE ? AND product.place LIKE ?
+  ORDER BY covid19_status ASC LIMIT ? OFFSET ?`;
   const queryCount = 'SELECT COUNT(id) FROM product';
 
   await connector()
@@ -32,7 +35,7 @@ const viewProduct = async (req: Request<any>, reply: Reply) => {
           });
 
           await conn
-            .query(query, [limit, offset])
+            .query(query, [`%${name}%`, `%${place}%`, limit, offset])
             .then((res) => (payload.data = res));
         })
         .then(() => {
@@ -52,10 +55,17 @@ const viewProduct = async (req: Request<any>, reply: Reply) => {
 const viewProductByID = async (req: Request<any>, reply: Reply) => {
   const {id} = req.params;
 
-  const queryProduct = `SELECT id, name_product, place FROM product WHERE id = ?`;
-  const queryPacket = `SELECT product_packet.id, product_packet.name_room, product_packet.facility, product_packet.price FROM product_packet
+  const queryProduct = `SELECT id, name_product, description, place, url_photo,
+  (SELECT status FROM covid19 WHERE covid19.id_product = product.id) AS 'covid19_status'
+  FROM product WHERE id = ?`;
+  const queryPacket = `SELECT product_packet.id, product_packet.name_room, product_packet.description, product_packet.price, product_packet.url_photo,
+  (SELECT packet_facility.name_facility FROM packet_facility WHERE packet_facility.id_packet = product_packet.id) AS facility
+  FROM product_packet
   INNER JOIN product ON product.id = product_packet.id_product
   WHERE product_packet.id_product = ?`;
+  const queryReview = `SELECT review.id, user.name, review.star, review.comment FROM review
+  INNER JOIN user ON user.id = review.id_user
+  WHERE review.id_product = ?`;
 
   await connector()
     .then(async (conn) => {
@@ -63,13 +73,20 @@ const viewProductByID = async (req: Request<any>, reply: Reply) => {
       await conn
         .beginTransaction()
         .then(async () => {
+          // Get Product
           await conn.query(queryProduct, [id]).then((res) => {
             if (res.length > 0) payload = res[0];
           });
 
+          // Get Packet
           await conn
             .query(queryPacket, [id])
             .then((res) => (payload = {...payload, packet: res}));
+
+          // Get Review
+          await conn
+            .query(queryReview, [id])
+            .then((res) => (payload = {...payload, review: res}));
         })
         .then(() => {
           conn.commit();

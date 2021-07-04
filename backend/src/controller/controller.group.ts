@@ -60,16 +60,46 @@ const joinGroup = async (req: Request<any>, reply: Reply) => {
 
   const query = `INSERT INTO member_group
   (id_group, id_user) VALUES (?, ?)`;
+  const queryVerify = `SELECT test_antigen, test_pcr, vaccine FROM verified WHERE id_user = ?`;
 
   if (userToken) {
     await connector()
       .then(async (conn) => {
+        let statusResult = false;
         await conn
-          .query(query, [id_group, userId])
-          .then((res) =>
-            reply.code(200).send(response(true, 'Success Join Group')),
-          )
-          .catch((err) => errorHandler(400, reply))
+          .beginTransaction()
+          .then(async () => {
+            let payload: any = {};
+            // Check Status covid19 user
+            await conn.query(queryVerify, [userId]).then((res) => {
+              payload = res[0];
+            });
+
+            // Verify
+            const {test_antigen, test_pcr, vaccine} = payload;
+            if ((test_antigen || test_pcr) && vaccine) {
+              await conn.query(query, [id_group, userId]);
+              statusResult = true;
+            }
+          })
+          .then(() => {
+            conn.commit();
+            if (statusResult)
+              reply.code(200).send(response(true, 'Success Join Group'));
+            else
+              reply
+                .code(400)
+                .send(
+                  response(
+                    false,
+                    'Test Antigen / PCR and Vaccine is required!',
+                  ),
+                );
+          })
+          .catch((err) => {
+            conn.rollback();
+            errorHandler(400, reply);
+          })
           .finally(() => conn.end());
       })
       .catch((err) => errorHandler(500, reply));

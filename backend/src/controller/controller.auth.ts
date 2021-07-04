@@ -52,15 +52,31 @@ const userRegister = async (req: Request<any>, reply: Reply) => {
 
   const query = `INSERT INTO user (username, password, name, dob, no_hp)
   VALUES (?, ?, ?, ?, ?)`;
+  const queryIsVerified = `INSERT INTO verified (id_user, test_antigen, test_pcr, vaccine)
+  VALUES(?, ?, ?, ?)`;
 
   await connector()
     .then(async (conn) => {
       await conn
-        .query(query, [username, doEncrypt(password), name, dob, no_hp])
-        .then((res) =>
-          reply.code(200).send(response(true, 'Success register account!')),
-        )
-        .catch((err) => errorHandler(400, reply))
+        .beginTransaction()
+        .then(async () => {
+          let insertId = 0;
+          // Register User
+          await conn
+            .query(query, [username, doEncrypt(password), name, dob, no_hp])
+            .then((res) => (insertId = res?.insertId));
+
+          // Register verivied user
+          await conn.query(queryIsVerified, [insertId, false, false, false]);
+        })
+        .then(() => {
+          conn.commit();
+          reply.code(200).send(response(true, 'Success register account'));
+        })
+        .catch((err) => {
+          conn.rollback();
+          errorHandler(400, reply);
+        })
         .finally(() => conn.end());
     })
     .catch((err) => errorHandler(500, reply));

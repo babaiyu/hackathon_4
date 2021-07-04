@@ -36,10 +36,7 @@ const uploadImage = async (req: Request<any>, reply: Reply) => {
       const payload = {filename: filepath};
 
       reply.code(200).send(response(true, 'Success upload resume', payload));
-    } else {
-      console.log('Error===', err);
-      errorHandler(415, reply);
-    }
+    } else errorHandler(415, reply);
   });
 };
 

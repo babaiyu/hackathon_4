@@ -6,14 +6,15 @@ import response from '../helpers/response';
 
 // View Product
 const viewProduct = async (req: Request<any>, reply: Reply) => {
-  const {page} = req.query;
+  const {page, name, place} = req.query;
   const limit = 10;
   const offset = (page - 1) * limit;
 
   const query = `SELECT product.id, product.name_product, product.description, product.place, product.url_photo,
   (SELECT status FROM covid19 WHERE covid19.id_product = product.id) AS 'covid19_status'
   FROM product
-  ORDER BY product.id DESC LIMIT ? OFFSET ?`;
+  WHERE name_product LIKE ? AND product.place LIKE ?
+  ORDER BY covid19_status ASC LIMIT ? OFFSET ?`;
   const queryCount = 'SELECT COUNT(id) FROM product';
 
   await connector()
@@ -34,7 +35,7 @@ const viewProduct = async (req: Request<any>, reply: Reply) => {
           });
 
           await conn
-            .query(query, [limit, offset])
+            .query(query, [`%${name}%`, `%${place}%`, limit, offset])
             .then((res) => (payload.data = res));
         })
         .then(() => {

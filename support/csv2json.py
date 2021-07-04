@@ -21,5 +21,5 @@ sheet.cell_value(0, 0)
 for i in range(1,10):
   site = sheet.row_values(i)
   # print(site[0], " - ", site[1], " - ", site[2])
-  print("{\n", '"name_product": "{0}",\n "description": "{1}",\n "place": "{2}",\n "url_photo": "www.picture.id"\n'.format(site[0], site[1], site[2]), "}")
+  print("{\n", '"name_product": "{0}",\n "description": "{2}",\n "place": "{1}",\n "url_photo": "www.picture.id"\n'.format(site[0], site[1], site[2]), "}")
 

@@ -244,21 +244,18 @@
                         `<div class="col-xl-4 col-md-4">
                         <div class="single_offers">
                         <div class="about_thumb">
-                        
-                              <img src="${response.data.data[i].url_photo}" width="400px" height="400px" alt="">
+                        <img src="${response.data.data[i].url_photo}" width="400px" height="400px" alt="">
                         </div>
                         <h3>${response.data.data[i].name_product}</h3>
-                      
-                            <h3><b>${readmore}</b></h3>
-
+                        <h3><b>${readmore}</b></h3>
                         <br/>
                         <a href="#" class="book_now">book now</a>
                         <br/>
                         </div>
                         <br/>
                     </div>
-                        <br>
-                        `;
+                    <br>
+                    `;
 
                     $("#showDataPackage").append($html);
                 }

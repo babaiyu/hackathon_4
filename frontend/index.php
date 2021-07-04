@@ -48,7 +48,7 @@ if (isset($_GET['page'])) {
 
 <body>
     <!-- Header -->
-    <?php require_once 'template/cssHeader.php'; ?>
+    <?php require_once 'template/Header.php'; ?>
     <!-- End Header -->
 
     <!--CONTENT  -->

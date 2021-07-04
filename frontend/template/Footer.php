@@ -90,34 +90,18 @@
 
 <script type="text/javascript">
     $(document).ready(function() {
-        $("#formTrial").submit(function(e) {
+        var x = localStorage.getItem("token");
+
+        console.log('hadeuh', x);
+        $("#formLogin").submit(function(e) {
             e.preventDefault();
-            heheTRIAL();
+            Login();
             return false;
         });
 
-        $("#formUpgrade").submit(function(e) {
-            e.preventDefault();
-            hehePAYMENT();
-            return false;
-        });
-
-
-        $("#directPurchase").submit(function(e) {
-            e.preventDefault();
-            directPurchasePay();
-            return false;
-        });
 
 
     });
-
-
-
-
-
-
-
 
     function Register() {
         var data = $('#formRegister').serialize();
@@ -196,17 +180,37 @@
 
 
 
+        let payload = {
+            username: username,
+            password: password
+        };
+
         $.ajax({
             type: 'POST',
-            url: restHost + "process/processLogin.php?f=AddUserUIPAYMENT2",
-            data: data,
+            url: "http://101.50.0.53:8000/api/v1/login",
+            contentType: 'application/json',
+            data: JSON.stringify(payload),
             dataType: 'json',
             success: function(response) {
-                // console.log(response)
 
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success Login Happy Staycation !',
+                }).then(() => {
+                    console.log(response.data.token);
+
+                    localStorage.setItem('token', response.data.token);
+                    localStorage.setItem('username', response.data.user.username);
+                    localStorage.setItem('name', response.data.user.name);
+                    localStorage.setItem('no_hp', response.data.user.no_hp);
+
+                    window.location = "index.php?=home";
+                });
+                // console.log(data);
+                // console.log(response)
             },
             error: function(response) {
-                // console.log(response.responseText);
+                console.log(response);
             }
         });
     }

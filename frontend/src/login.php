@@ -14,13 +14,15 @@
                     <!-- <h3 class="mb-30">Form Login</h3> -->
                     <form action="#" id="formLogin" method="POST">
                         <div class="mt-10">
-                            <input type="text" name="username" placeholder="First Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" required class="single-input">
+                            <input type="text" name="username" id="username" placeholder="First Name" required class="single-input">
                         </div>
                         <div class="mt-10">
-                            <input type="password" name="password" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" required class="single-input">
+                            <input type="password" name="password" id="password" placeholder="Password" required class="single-input">
                         </div>
                         <br>
-                        <a href="#" class="genric-btn primary-border">Primary</a>
+
+                        <input type="submit" class="genric-btn success-border" value="Login">
+
 
                     </form>
                 </div>

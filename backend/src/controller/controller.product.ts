@@ -93,7 +93,6 @@ const viewProductByID = async (req: Request<any>, reply: Reply) => {
           reply.code(200).send(response(true, '', payload));
         })
         .catch((err) => {
-          console.log('ERrr===', err);
           conn.rollback();
           errorHandler(400, reply);
         })

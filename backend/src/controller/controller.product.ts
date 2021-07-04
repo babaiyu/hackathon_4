@@ -55,10 +55,12 @@ const viewProduct = async (req: Request<any>, reply: Reply) => {
 const viewProductByID = async (req: Request<any>, reply: Reply) => {
   const {id} = req.params;
 
-  const queryProduct = `SELECT id, name_product, place, url_photo,
+  const queryProduct = `SELECT id, name_product, description, place, url_photo,
   (SELECT status FROM covid19 WHERE covid19.id_product = product.id) AS 'covid19_status'
   FROM product WHERE id = ?`;
-  const queryPacket = `SELECT product_packet.id, product_packet.name_room, product_packet.price FROM product_packet
+  const queryPacket = `SELECT product_packet.id, product_packet.name_room, product_packet.description, product_packet.price, product_packet.url_photo,
+  (SELECT packet_facility.name_facility FROM packet_facility WHERE packet_facility.id_packet = product_packet.id) AS facility
+  FROM product_packet
   INNER JOIN product ON product.id = product_packet.id_product
   WHERE product_packet.id_product = ?`;
   const queryReview = `SELECT review.id, user.name, review.star, review.comment FROM review

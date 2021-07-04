@@ -6,6 +6,7 @@ import routePayment from './router/router.payment';
 import routeGroup from './router/router.group';
 import routeUpload from './router/router.upload';
 import routeReview from './router/router.review';
+import routeVerify from './router/router.verify';
 
 const routes: RouteOptions[] = [
   ...routeHome,
@@ -15,6 +16,7 @@ const routes: RouteOptions[] = [
   ...routeGroup,
   ...routeUpload,
   ...routeReview,
+  ...routeVerify,
 ];
 
 export default routes;

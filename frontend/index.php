@@ -5,21 +5,20 @@ if (isset($_GET['page'])) {
     switch ($page) {
         case 'home':
             include "./src/home.php";
-            // $home = "src/home.php";
             break;
-            // case 'tentang':
-            //     include "src/tentang.php";
-            //     break;
-            // case 'tutorial':
-            //     include "src/tutorial.php";
-            //     break;
-            // default:
-            //     echo "<center><h3>Maaf. Halaman tidak di temukan !</h3></center>";
-            //     break;
+        case 'login':
+            include "./src/login.php";
+            break;
+        case 'register':
+            include "./src/register.php";
+            break;
+        case 'blog':
+            include "./src/single-blog.php";
+            break;
     }
     // console . log('pages', $pages);
 } else {
-    include "src/home.php";
+    include "./src/home.php";
     // console . log($page);
 }
 
@@ -30,7 +29,7 @@ if (isset($_GET['page'])) {
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Miami</title>
+    <title>Anti Wacana</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -48,7 +47,7 @@ if (isset($_GET['page'])) {
 
 <body>
     <!-- Header -->
-    <?php require_once 'template/cssHeader.php'; ?>
+    <?php require_once 'template/Header.php'; ?>
     <!-- End Header -->
 
     <!--CONTENT  -->
@@ -62,6 +61,31 @@ if (isset($_GET['page'])) {
 
     <!-- form itself end-->
     <form id="test-form" class="white-popup-block mfp-hide">
+        <div class="popup_box ">
+            <div class="popup_inner">
+                <h3>Register</h3>
+                <form action="#" method="POST">
+                    <div class="col">
+                        <div class="col-xl-6" class="form form-control">
+                            <input type="text" id="username" placeholder="Username">
+                        </div>
+                        <div class="col-xl-6" class="form form-control">
+                            <input type="password" id="password" placeholder="Password">
+                        </div>
+
+                        <div class="col-xl-12" class="form form-control">
+                            <button type="submit" class="boxed-btn3">Register</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </form>
+    <!-- form itself end -->
+
+
+    <!-- form itself end-->
+    <!-- <form id="login-form" class="white-popup-block mfp-hide">
         <div class="popup_box ">
             <div class="popup_inner">
                 <h3>Check Availability</h3>
@@ -105,7 +129,7 @@ if (isset($_GET['page'])) {
                 </form>
             </div>
         </div>
-    </form>
+    </form> -->
     <!-- form itself end -->
 
     <!-- JS here -->

@@ -249,7 +249,7 @@
                         <h3>${response.data.data[i].name_product}</h3>
                         <h3><b>${readmore}</b></h3>
                         <br/>
-                        <a href="#" class="book_now">book now</a>
+                        <a href="#test-form" class="book_now">book now</a>
                         <br/>
                         </div>
                         <br/>

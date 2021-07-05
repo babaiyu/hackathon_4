@@ -11,6 +11,8 @@
                                        <li><a class="active" href="index.php?page=home">Home</a></li>
                                        <li><a href="index.php?page=login">Login</a></li>
                                        <li><a href="index.php?page=register">Register</a></li>
+                                       <li><a href="index.php?page=blog">blog</a></li>
+
                                        <!-- <li><a href="#">blog <i class="ti-angle-down"></i></a>
                                            <ul class="submenu">
                                                <li><a href="blog.html">blog</a></li>

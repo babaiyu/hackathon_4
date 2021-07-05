@@ -12,9 +12,9 @@ if (isset($_GET['page'])) {
         case 'register':
             include "./src/register.php";
             break;
-            // default:
-            //     echo "<center><h3>Maaf. Halaman tidak di temukan !</h3></center>";
-            //     break;
+        case 'blog':
+            include "./src/single-blog.php";
+            break;
     }
     // console . log('pages', $pages);
 } else {
